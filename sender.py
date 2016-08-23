@@ -3,24 +3,25 @@ import sys
 import socket
 import json
 
+# Making Enum
+def enum(**named_values):
+    return type('Enum', (), named_values)
+
 class SendProcessor:
+    # const data
     HOST = "accinoty.pendual.net"
     PORT = 8088
     BUFSIZE = 1024
     ADDR = (HOST, PORT)
 
+    Status = enum(IDLE=0, OCCUR=1, AROUND=2)
+
+    def run(self):
+        pass
 
 
-HOST= "accinoty.pendual.net"
-PORT= 8088
-BUFSIZE= 1024
-ADDR= (HOST, PORT)
 
-# Making Enum
-def enum(**named_values):
-    return type('Enum', (), named_values)
 
-Status= enum(IDLE= 0, OCCUR= 1, AROUND= 2)
 
 
 #### TEST DATA ####
@@ -32,7 +33,7 @@ receivedIndex= '69호 5366' #주변의 사고차량 번호
 ##################
 
 jsonObj= {
-    'type': curStatus,
+    'flag': curStatus,
     'car_index': carIndex,
     #'accident_around': receivedIndex,
     # packet type

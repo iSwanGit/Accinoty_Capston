@@ -1,15 +1,18 @@
 import time
 import picamera
+import threading
 
-class Recorder:
-    VIDEO_CNT= 1
-    def __init__(self, count= None):
+
+class Recorder(threading.Thread):
+    global VIDEO_CNT
+
+    def __init__(self, count=None):
         if count is not None:
-            self.VIDEO_CNT= count
+            self.VIDEO_CNT = count
         else:
-            self.VIDEO_CNT= 1
+            self.VIDEO_CNT = 1
 
-    def Run(self):
+    def run(self):
         with picamera.PiCamera() as camera:
             camera.start_preview()
             while True:
@@ -24,7 +27,6 @@ class Recorder:
 
             camera.stop_preview()
             camera.close()
-
 
 
 """
