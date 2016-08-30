@@ -9,7 +9,7 @@ def enum(**named_values):
 ##### SHARING VARS #####
 
 # original car num
-builtins.CAR_INDEX = '14허 3810' #const
+builtins.CAR_INDEX = 3810 #const
 
 builtins.VIDEO_CNT = 0  #녹화중인 걸 포함한 파일개수
 builtins.MAX_VIDEO= 30

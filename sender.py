@@ -42,20 +42,25 @@ class Sender(threading.Thread):
         random.seed()
         while True:
             if returnJSONParsed == builtins.Status.IDLE:
-                time.sleep((4700+random.randint(0, 500))/100)
+                print('if1')
                 self.SendCycle()
             elif builtins.accidentOccured is True:
+                print('if2')
                 self.SetTrigger(builtins.Status.OCCUR)
                 self.SendAccidentOccur()
             else:       #logic check
+                print('else')
                 self.SetTrigger(builtins.Status.AROUND)
                 self.SendAccidentAround(returnJSONParsed)
             self.ResetTrigger()
+            time.sleep((4700 + random.randint(0, 500)) / 1000)
             returnJSON= json.loads(self.mySocket.recv(self.BUFSIZE).decode())
             returnJSONParsed= returnJSON['ack']
+            print(returnJSONParsed)
 
 
     def SendCycle(self):
+        print('sendcycle')
         #global curStatus, CAR_INDEX
         #if self.location.latitude is None and self.location.longitude is None:  #lat long 둘중 하나만 없어도
         #    return
@@ -65,7 +70,7 @@ class Sender(threading.Thread):
             'flag': builtins.curStatus,
             'car_index': builtins.CAR_INDEX,
             'latitude': self.location.latitude,
-            'longitude': self.location.longitutde
+            'longitude': self.location.longitude
         }
         jsonString= json.dumps(jsonObj)
         self.mySocket.send(jsonString.encode())
@@ -73,6 +78,8 @@ class Sender(threading.Thread):
 
 
     def SetTrigger(self, type):
+        print('settrigger')
+
         #self.triggeredCount= builtins.VIDEO_CNT  #trigger video count
         #처음 녹화중에 대한 예외처리
         while True:
@@ -92,50 +99,77 @@ class Sender(threading.Thread):
         builtins.curStatus= builtins.Status.IDLE
 
     def SendAccidentOccur(self):
-        if self.location.latitude is None:
-            return
+        #if self.location.latitude is None:
+        #    return
         jsonObj = {
             'flag': builtins.Status.OCCUR,
             'car_index': builtins.CAR_INDEX,
             'latitude': self.location.latitude,
-            'longitude': self.location.longitutde
+            'longitude': self.location.longitude
         }
         jsonString= json.dumps(jsonObj)
         self.mySocket.send(jsonString.encode())
         self.SendFile()
 
     def SendAccidentAround(self, receivedIndex):
-        if self.location.latitude is None:
-            return
+        #if self.location.latitude is None:
+        #    return
         jsonObj = {
             'flag': builtins.Status.AROUND,
             'car_index': builtins.CAR_INDEX,
             'accident_index': receivedIndex,     # 사고번호
             'latitude': self.location.latitude,
-            'longitude': self.location.longitutde
+            'longitude': self.location.longitude
         }
         jsonString= json.dumps(jsonObj)
         self.mySocket.send(jsonString.encode())
         self.SendFile()
 
     def SendFile(self):
+        print('sendfile')
+
         #curCompletedCnt= builtins.VIDEO_CNT
         fname= ''
         if builtins.curStatus == builtins.Status.OCCUR:  #event 로 변경
+            print('first if')
             os.rename(builtins.videoPath + self.triggeredPath, builtins.eventPath + 'event_'+self.triggeredPath[6:])
             fname= sorted(os.listdir(builtins.eventPath))[-1]
             fsize= os.path.getsize(builtins.eventPath+fname)
             self.mySocket.send(str(fsize).encode())
-            self.mySocket.sendfile(builtins.eventPath+fname)    # first file
+            file= open(builtins.eventPath+fname, 'rb')
+            buf= file.read(self.BUFSIZE)
+            while buf:
+                self.mySocket.send(buf)
+                buf = file.read(self.BUFSIZE)
+            file.close()
+            #self.mySocket.send(builtins.eventPath+fname)    # first file
+            print('first sent')
+
 
         while self.nextPath == sorted(os.listdir(builtins.videoPath))[-1]:      # 새로운 파일이 기록되기 전에는
+            print('while')
             time.sleep(5)   # 바뀔때까지 기다림
 
+        print('second')
         os.rename(builtins.videoPath + self.nextPath, builtins.eventPath + 'event_'+self.nextPath[6:])
         fname= sorted(os.listdir(builtins.eventPath))[-1]
         fsize= os.path.getsize(builtins.eventPath+fname)
+
         self.mySocket.send(str(fsize).encode())
-        self.mySocket.sendfile(builtins.eventPath + fname)  # second/first file
+        file = open(builtins.eventPath + fname, 'rb')
+        buf = file.read(self.BUFSIZE)
+        #sz= 0
+        while buf:
+            #print(len(buf))
+            self.mySocket.send(buf)
+            #sz+=len(buf)
+            buf= file.read(self.BUFSIZE)
+        #print(len(buf))
+        #print(sz)
+        #self.mySocket.send(file.read(fsize))
+        file.close()
+        print('second sent')
+        #self.mySocket.sendfile(builtins.eventPath + fname)  # second/first file
 
 
             # 사고차는 전파일 촬영중파일 두개

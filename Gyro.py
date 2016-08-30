@@ -18,10 +18,10 @@ class Gyro(threading.Thread):
         if (self.serialPipe.inWaiting() > 0):
             input = self.serialPipe.readline().decode()
 
-            if (input[:-2] == 'accident'):
-                return True
-            else:
-                return False
+            #if (input[:-2] == 'accident'):
+            #    return True
+            #else:
+            return False
 
     def run(self):
         while True:

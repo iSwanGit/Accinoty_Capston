@@ -36,18 +36,18 @@ class Recorder(threading.Thread):
                 os.remove(builtins.videoPath+sorted(os.listdir(builtins.videoPath))[0])
                 #self.CURRENT_CNT = 1
             tm = time.strftime('%y%m%d_%H%M%S', time.localtime())
-            print('recording start')
+            #print('recording start')
             self.camera.start_recording(builtins.videoPath+'video_' + tm + '.h264')
             self.camera.wait_recording(builtins.RECORDING_TIME)
             self.camera.stop_recording()
-            print('recording stop')
+            #print('recording stop')
             #builtins.VIDEO_CNT = self.CURRENT_CNT
 
 
     # Stop camera
     def camera_stop(self):
         self.camera.stop_preview()
-        self.camera.stop_recording()
+        #self.camera.stop_recording()
         self.camera.close()
 
         # need additional code for sending video
