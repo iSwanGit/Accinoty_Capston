@@ -1,22 +1,21 @@
-import time, threading
+import time, threading, os
 import picamera
 import builtins
 # Thread Lock과 같은 일환으로 완료된 VIDEO_CNT를 반영
 class Recorder(threading.Thread):
     CURRENT_CNT = 0  # next count
-    RECORDING_TIME = 5
+
 
     camera = picamera.PiCamera()
 
 
 
+
     # Constructor
-    def __init__(self, count= None):
-        if count is not None:
-            builtins.VIDEO_CNT= count
-        else:
-            builtins.VIDEO_CNT= 0
-        self.serialFromArduino.flushInput()
+    def __init__(self):
+        threading.Thread.__init__(self)
+        builtins.VIDEO_CNT= len(os.listdir(builtins.videoPath))
+        builtins.EVENT_CNT= len(os.listdir(builtins.eventPath))
 
     def __del__(self):
         self.camera_stop()
@@ -29,15 +28,20 @@ class Recorder(threading.Thread):
         #global MAX_COUNT
         self.camera.start_preview()
         while True:
-            if builtins.VIDEO_CNT < builtins.MAX_COUNT:
-                self.CURRENT_CNT = builtins.VIDEO_CNT + 1
+
+            if builtins.VIDEO_CNT < builtins.MAX_VIDEO:
+                builtins.VIDEO_CNT += 1
+                #self.CURRENT_CNT = builtins.VIDEO_CNT + 1
             else:
-                self.CURRENT_CNT = 1
+                os.remove(builtins.videoPath+sorted(os.listdir(builtins.videoPath))[0])
+                #self.CURRENT_CNT = 1
             tm = time.strftime('%y%m%d_%H%M%S', time.localtime())
-            self.camera.start_recording('./video/'+'video_' + str(self.CURRENT_CNT) +'_' + tm + '.h264')
-            self.camera.wait_recording(self.RECORDING_TIME)
+            print('recording start')
+            self.camera.start_recording(builtins.videoPath+'video_' + tm + '.h264')
+            self.camera.wait_recording(builtins.RECORDING_TIME)
             self.camera.stop_recording()
-            builtins.VIDEO_CNT = self.CURRENT_CNT
+            print('recording stop')
+            #builtins.VIDEO_CNT = self.CURRENT_CNT
 
 
     # Stop camera

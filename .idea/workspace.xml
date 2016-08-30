@@ -2,12 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f03b4078-5447-476b-81fe-f3a459394f07" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/GPSLogger.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Gyro.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ExternalLogger.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/record_video.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AccinotyPi.py" afterPath="$PROJECT_DIR$/AccinotyPi.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GPSLogger.py" afterPath="$PROJECT_DIR$/GPSLogger.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gyro.py" afterPath="$PROJECT_DIR$/Gyro.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/MyLocation.py" afterPath="$PROJECT_DIR$/MyLocation.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Recorder.py" afterPath="$PROJECT_DIR$/Recorder.py" />
     </list>
     <ignored path="Capston_SJL.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,8 +36,8 @@
       <file leaf-file-name="Sender.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Sender.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+            <state relative-caret-position="1696">
+              <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
               <folding>
                 <element signature="e#23#62#0" expanded="true" />
               </folding>
@@ -48,8 +48,8 @@
       <file leaf-file-name="AccinotyPi.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AccinotyPi.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+            <state relative-caret-position="121">
+              <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
               <folding>
                 <element signature="e#0#16#0" expanded="true" />
               </folding>
@@ -60,8 +60,8 @@
       <file leaf-file-name="MyLocation.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MyLocation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -70,10 +70,10 @@
       <file leaf-file-name="Recorder.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Recorder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
+            <state relative-caret-position="451">
+              <caret line="35" column="87" selection-start-line="35" selection-start-column="87" selection-end-line="35" selection-end-column="87" />
               <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -82,8 +82,8 @@
       <file leaf-file-name="GPSLogger.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GPSLogger.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="285">
+              <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -94,8 +94,8 @@
       <file leaf-file-name="Gyro.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Gyro.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
+            <state relative-caret-position="165">
+              <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -123,12 +123,12 @@
         <option value="$PROJECT_DIR$/record_video.py" />
         <option value="$PROJECT_DIR$/ExternalLogger.py" />
         <option value="$PROJECT_DIR$/Location.py" />
-        <option value="$PROJECT_DIR$/MyLocation.py" />
         <option value="$PROJECT_DIR$/Gyro.py" />
-        <option value="$PROJECT_DIR$/Recorder.py" />
-        <option value="$PROJECT_DIR$/Sender.py" />
         <option value="$PROJECT_DIR$/GPSLogger.py" />
         <option value="$PROJECT_DIR$/AccinotyPi.py" />
+        <option value="$PROJECT_DIR$/MyLocation.py" />
+        <option value="$PROJECT_DIR$/Sender.py" />
+        <option value="$PROJECT_DIR$/Recorder.py" />
       </list>
     </option>
   </component>
@@ -139,10 +139,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="960" />
-    <option name="y" value="23" />
+    <option name="x" value="846" />
+    <option name="y" value="76" />
     <option name="width" value="960" />
-    <option name="height" value="1122" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -473,7 +473,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="960" y="23" width="960" height="1122" extended-state="0" />
+    <frame x="846" y="76" width="960" height="1000" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2124183" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -482,7 +482,7 @@
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.49410897" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29029125" sideWeight="0.49410897" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32929516" sideWeight="0.49410897" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.4970545" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -622,10 +622,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Gyro.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/AccinotyPi.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+        <state relative-caret-position="121">
+          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
           <folding>
             <element signature="e#0#16#0" expanded="true" />
           </folding>
@@ -634,46 +644,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MyLocation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="0" selection-start-line="18" selection-start-column="0" selection-end-line="18" selection-end-column="0" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="43" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Recorder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#22#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GPSLogger.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="285">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Gyro.py">
+    <entry file="file://$PROJECT_DIR$/Recorder.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="42" selection-start-line="17" selection-start-column="42" selection-end-line="17" selection-end-column="42" />
+        <state relative-caret-position="451">
+          <caret line="35" column="87" selection-start-line="35" selection-start-column="87" selection-end-line="35" selection-end-column="87" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Sender.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="26" selection-start-line="19" selection-start-column="26" selection-end-line="19" selection-end-column="26" />
+        <state relative-caret-position="1696">
+          <caret line="132" column="0" selection-start-line="132" selection-start-column="0" selection-end-line="132" selection-end-column="0" />
           <folding>
             <element signature="e#23#62#0" expanded="true" />
           </folding>

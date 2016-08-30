@@ -2,9 +2,8 @@
 import sys, random, time, os, threading
 import socket
 import json
-import MyLocation
 import builtins #for sharing variables
-
+import MyLocation
 
 class Sender(threading.Thread):
     #global VIDEO_CNT
@@ -15,9 +14,19 @@ class Sender(threading.Thread):
     ADDR = (HOST, PORT)
 
     mySocket= None
-    location= MyLocation()
+    location= MyLocation.MyLocation()
 
-    triggeredCount= 0   #사고발생 혹은 사고수신시 녹화완료된 파일
+    #triggeredCount= 0   #사고발생 혹은 사고수신시 녹화완료된 파일
+    triggeredPath= None
+    nextPath= None
+
+    def __init__(self):
+        threading.Thread.__init__(self)
+
+    def __del__(self):
+        jsonEnd= { 'flag': 6 }
+        self.mySocket.send(json.dumps(jsonEnd).encode())
+        self.mySocket.close()
 
     def run(self):
         self.mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -48,8 +57,10 @@ class Sender(threading.Thread):
 
     def SendCycle(self):
         #global curStatus, CAR_INDEX
-        if self.location.latitude is None:  #lat long 둘중 하나만 없어도
-            return
+        #if self.location.latitude is None and self.location.longitude is None:  #lat long 둘중 하나만 없어도
+        #    return
+        print(self.location.latitude)
+        print(self.location.longitude)
         jsonObj= {
             'flag': builtins.curStatus,
             'car_index': builtins.CAR_INDEX,
@@ -62,14 +73,23 @@ class Sender(threading.Thread):
 
 
     def SetTrigger(self, type):
-        self.triggeredCount= builtins.VIDEO_CNT  #trigger video count
+        #self.triggeredCount= builtins.VIDEO_CNT  #trigger video count
+        #처음 녹화중에 대한 예외처리
+        while True:
+            if len(os.listdir(builtins.videoPath)) == 1:
+                time.sleep(5)
+            else:
+                break
+        self.triggeredPath= sorted(os.listdir(builtins.videoPath))[-2]
+        self.nextPath= sorted(os.listdir(builtins.videoPath))[-1]
         builtins.curStatus= type
         builtins.accidentOccured= False #curStatus 반영했으니 다음 충격을 기다림
 
 
     def ResetTrigger(self):
-        self.triggeredCount= 0
-        builtins.curStatus= builtins.curStatus.IDLE
+        #self.triggeredCount= 0
+        self.triggeredPath= None
+        builtins.curStatus= builtins.Status.IDLE
 
     def SendAccidentOccur(self):
         if self.location.latitude is None:
@@ -101,26 +121,21 @@ class Sender(threading.Thread):
     def SendFile(self):
         #curCompletedCnt= builtins.VIDEO_CNT
         fname= ''
-        if self.triggeredCount != 0:
-            for filename in os.listdir('./video'):
-                if filename.startswith('video_'+self.triggeredCount):
-                    os.rename(filename, '../event/event_' + filename[6:])
-                    fname= 'event_'+filename[6:]
-                    break
-            fsize= os.path.getsize('./event/'+fname)
+        if builtins.curStatus == builtins.Status.OCCUR:  #event 로 변경
+            os.rename(builtins.videoPath + self.triggeredPath, builtins.eventPath + 'event_'+self.triggeredPath[6:])
+            fname= sorted(os.listdir(builtins.eventPath))[-1]
+            fsize= os.path.getsize(builtins.eventPath+fname)
             self.mySocket.send(str(fsize).encode())
-            self.mySocket.sendfile('./event/'+fname)    # first file
+            self.mySocket.sendfile(builtins.eventPath+fname)    # first file
 
-        while self.triggeredCount == builtins.VIDEO_CNT:
+        while self.nextPath == sorted(os.listdir(builtins.videoPath))[-1]:      # 새로운 파일이 기록되기 전에는
             time.sleep(5)   # 바뀔때까지 기다림
-        for filename in os.listdir('./video'):
-            if filename.startswith('video_' + builtins.VIDEO_CNT):
-                os.rename(filename, '../event/event_' + filename[6:])
-                fname = 'event_' + filename[6:]
-                break
-        fsize = os.path.getsize('./event/' + fname)
+
+        os.rename(builtins.videoPath + self.nextPath, builtins.eventPath + 'event_'+self.nextPath[6:])
+        fname= sorted(os.listdir(builtins.eventPath))[-1]
+        fsize= os.path.getsize(builtins.eventPath+fname)
         self.mySocket.send(str(fsize).encode())
-        self.mySocket.sendfile('./event/' + fname)  # second/first file
+        self.mySocket.sendfile(builtins.eventPath + fname)  # second/first file
 
 
             # 사고차는 전파일 촬영중파일 두개

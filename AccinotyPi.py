@@ -1,5 +1,5 @@
 import threading
-import Recorder, Sender, Gyro, GPSLogger, MyLocation
+import Recorder, Sender, Gyro, GPSLogger
 import builtins #for sharing variables
 
 # Making Enum
@@ -11,10 +11,15 @@ def enum(**named_values):
 # original car num
 builtins.CAR_INDEX = '14허 3810' #const
 
-builtins.VIDEO_CNT = 0
-builtins.MAX_COUNT= 5
-#builtins.EVENT_COUNT= 0
-#builtins.MAX_EVENT= 30
+builtins.VIDEO_CNT = 0  #녹화중인 걸 포함한 파일개수
+builtins.MAX_VIDEO= 30
+builtins.EVENT_CNT= 0
+builtins.MAX_EVENT= 50
+
+builtins.RECORDING_TIME = 5
+
+builtins.videoPath= './video/'
+builtins.eventPath= './event/'
 
 # Status
 builtins.Status = enum(IDLE=0, OCCUR=1, AROUND=2)
@@ -30,10 +35,10 @@ if __name__ == '__main__':
 
     # 충격이후 파일 event + 시간 표시 변경
 
-    recorder= Recorder()
-    gps= GPSLogger()
-    gyro= Gyro()
-    sender= Sender()
+    recorder= Recorder.Recorder()
+    gps= GPSLogger.GPSLogger()
+    gyro= Gyro.Gyro()
+    sender= Sender.Sender()
 
     gps.start()
     gyro.start()

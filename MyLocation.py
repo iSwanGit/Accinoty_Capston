@@ -3,10 +3,10 @@
 class MyLocation(object):
     class __OnlyOne:
         def __init__(self):
-            self.latitude = None
-            self.longitude = None
+            self.latitude = 0.0
+            self.longitude = 0.0
         def __str__(self):
-            return repr(self) + self.val
+            return repr(self)
     instance = None
     def __new__(cls): # __new__ always a classmethod
         if not MyLocation.instance:

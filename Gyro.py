@@ -8,6 +8,9 @@ class Gyro(threading.Thread):
     port = "/dev/ttyACM0"
     serialPipe = serial.Serial(port, 9600)  # Thread 1 : Receive serial output by Arduino
 
+    def __init__(self):
+        threading.Thread.__init__(self)
+
     # Thread 1 : Receive serial output by Arduino
     def receive_serial(self):
 
