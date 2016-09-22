@@ -1,16 +1,27 @@
 import serial
 import threading
 import MyLocation
+import time
 
 class GPSLogger(threading.Thread):
     location= MyLocation.MyLocation()
     # var port : connected port into arduino
     # port number 9600
     port = "/dev/ttyACM1"
-    serialPipe = serial.Serial(port, 9600)  # Thread 1 : Receive serial output by Arduino
+    serialPipe= None
 
     def __init__(self):
         threading.Thread.__init__(self)
+
+        while True:
+            try:
+                self.serialPipe = serial.Serial(self.port, 9600)  # Thread 1 : Receive serial output by Arduino
+            except Exception as e:
+                print('gpslogger error')
+                time.sleep(10)
+                continue
+            finally:
+                break
 
     # Thread 1 : Receive serial output by Arduino
     def receive_serial(self):

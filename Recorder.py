@@ -6,7 +6,7 @@ class Recorder(threading.Thread):
     CURRENT_CNT = 0  # next count
 
 
-    camera = picamera.PiCamera()
+    camera = None
 
 
 
@@ -16,6 +16,16 @@ class Recorder(threading.Thread):
         threading.Thread.__init__(self)
         builtins.VIDEO_CNT= len(os.listdir(builtins.videoPath))
         builtins.EVENT_CNT= len(os.listdir(builtins.eventPath))
+        while True:
+            try:
+                self.camera= picamera.PiCamera()
+            except Exception as e:
+                print('picamera error')
+                time.sleep(10)
+                continue
+            finally:
+                break
+
 
     def __del__(self):
         self.camera_stop()

@@ -30,12 +30,16 @@ class Sender(threading.Thread):
 
     def run(self):
         self.mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-            self.mySocket.connect(self.ADDR)
-            print('Connected to server successfully')
-        except Exception as e:
-            print('Cannot connect server')
-            sys.exit()
+        while True:
+            try:
+                self.mySocket.connect(self.ADDR)
+                print('Connected to server successfully')
+            except Exception as e:
+                print('Cannot connect server')
+                time.sleep(10)
+                continue
+            finally:
+                break
 
         returnJSON= None
         returnJSONParsed= 0
@@ -132,6 +136,8 @@ class Sender(threading.Thread):
         fname= ''
         if builtins.curStatus == builtins.Status.OCCUR:  #event 로 변경
             print('first if')
+            while len(sorted(os.listdir(builtins.videoPath))) == 1:
+                time.sleep(5)
             os.rename(builtins.videoPath + self.triggeredPath, builtins.eventPath + 'event_'+self.triggeredPath[6:])
             fname= sorted(os.listdir(builtins.eventPath))[-1]
             fsize= os.path.getsize(builtins.eventPath+fname)
